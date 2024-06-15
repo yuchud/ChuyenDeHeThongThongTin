@@ -1,18 +1,22 @@
+# File của Github Actions
+
 name: CI/CD Pipeline
 
+# Chạy khi có sự kiện push hoặc pull request trên nhánh main hoặc CICD_Test
 on:
   push:
     branches: [ main, CICD_Test ]
   pull_request:
     branches: [ main, CICD_Test ]
 
+# Các công việc cần thực hiện
 jobs:
   build:
-
     runs-on: ubuntu-latest
     services:
+      # build job sẽ chạy trên container của mysql:5.7
       db:
-        image: mysql:5.7
+        image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: password
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
