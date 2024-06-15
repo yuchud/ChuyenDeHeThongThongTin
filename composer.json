@@ -1,5 +1,15 @@
 {
     "name": "myvendor/myproject",
+    "description": "My project",
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    },
     "extra": {
         "github": {
             "actions": {
