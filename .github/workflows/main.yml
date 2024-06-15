@@ -1,0 +1,43 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Validate Composer files
+      uses: docker://composer:1.9.0
+      with:
+        args: validate
+
+    - name: Install Dependencies
+      uses: docker://composer:1.9.0
+      with:
+        args: install
+
+    - name: Run Tests
+      run: |
+        docker-compose up -d
+        docker-compose exec -T wordpress phpunit
+        docker-compose down
+
+    - name: Build Docker Image
+      run: docker build . -t my-wordpress
+
+    - name: Push to Docker Hub
+      run: |
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        docker tag my-wordpress $DOCKER_USERNAME/my-wordpress
+        docker push $DOCKER_USERNAME/my-wordpress
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
