@@ -1,4 +1,5 @@
 {
+    "name": "myvendor/myproject",
     "extra": {
         "github": {
             "actions": {
