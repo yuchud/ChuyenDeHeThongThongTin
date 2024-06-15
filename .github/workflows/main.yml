@@ -10,7 +10,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    services:
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
     - uses: actions/checkout@v2
 
@@ -24,17 +29,6 @@ jobs:
       with:
         args: install
 
-    - name: Run Tests
-      run: |
-        docker-compose up
-        docker-compose down
-    services:
-      db:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: password
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    steps:
     - name: Check out repository code
       uses: actions/checkout@v2
 
@@ -43,3 +37,8 @@ jobs:
         while ! mysqladmin ping -h"127.0.0.1" --silent; do
             sleep 1
         done
+
+    - name: Run Tests
+      run: |
+        docker-compose up
+        docker-compose down
