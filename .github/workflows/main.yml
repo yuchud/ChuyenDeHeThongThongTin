@@ -29,9 +29,6 @@ jobs:
       with:
         args: install
 
-    - name: Check out repository code
-      uses: actions/checkout@v2
-
     - name: Wait for MySQL to become ready
       run: |
         while ! mysqladmin ping -h"127.0.0.1" --silent; do
