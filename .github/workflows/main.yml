@@ -9,19 +9,27 @@ on:
   pull_request:
     branches: [ main, CICD_Test ]
 
-# Các công việc cần thực hiện
+# Các job cần thực hiện trên Github Actions
 jobs:
+  # thực hiện build trên Github Actions
   build:
+    # Được chạy trên phiên bản mới nhất của Ubuntu
     runs-on: ubuntu-latest
+    # Các services cần chạy cho job
     services:
-      # build job sẽ chạy trên container của mysql:5.7
+      # build job sẽ chạy bản mới nhất của mysql từ Docker Hub
       db:
         image: mysql:latest
+        # Cấu hình biến môi trường (enviroment variable) cho mysql
         env:
           MYSQL_ROOT_PASSWORD: password
+        # Kiểm tra sức khỏe (health) của mysql
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    # Các tasks cần thực hiện trong job
     steps:
-    - uses: actions/checkout@v3
+    # Checkout mã nguồn từ repository
+    # Xem thêm tại: https://github.com/actions/checkout
+    - uses: actions/checkout@v4
 
     - name: Validate Composer files
       uses: docker://composer:1.9.0
