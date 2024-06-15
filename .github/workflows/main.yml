@@ -29,12 +29,6 @@ jobs:
       with:
         args: install
 
-    - name: Wait for MySQL to become ready
-      run: |
-        while ! mysqladmin ping -h"127.0.0.1" --silent; do
-            sleep 1
-        done
-
     - name: Run Tests
       run: |
         docker-compose up
