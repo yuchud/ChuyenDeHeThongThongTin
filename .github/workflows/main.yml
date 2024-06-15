@@ -31,5 +31,5 @@ jobs:
 
     - name: Run Tests
       run: |
-        docker-compose up
+        docker-compose up -d
         docker-compose down
