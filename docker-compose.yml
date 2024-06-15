@@ -7,13 +7,13 @@
 # Sử dụng phiên bản mới nhất của docker-compose
 version: '3'
 
-#Danh sách tất cả services (containers) cần chạy
+# Danh sách tất cả services (containers) cần chạy
 # bao gồm wordpress, db, nginx
 services:
   # Service đầu tiên (wordpress)
   wordpress:
     # Sử dụng phiên bản mới nhất của wordpress từ Docker Hub
-    # Docker Hub: https://hub.docker.com/_/wordpress
+    # Docker Hub wordpress: https://hub.docker.com/_/wordpress
     image: wordpress:latest
     # Luôn khởi động lại container nếu container bị dừng
     restart: always
@@ -33,7 +33,7 @@ services:
   # Service thứ hai (db)
   db:
     # Sử dụng phiên bản mới nhất của mysql từ Docker Hub
-    # Docker Hub: https://hub.docker.com/_/mysql
+    # Docker Hub mysql: https://hub.docker.com/_/mysql
     image: mysql:latest
     # Luôn khởi động lại container nếu container bị dừng
     restart: always
@@ -50,7 +50,7 @@ services:
   # Service thứ ba (nginx)
   nginx:
     # Sử dụng phiên bản mới nhất của nginx từ Docker Hub
-    # Docker Hub: https://hub.docker.com/_/nginx
+    # Docker Hub nginx: https://hub.docker.com/_/nginx
     image: nginx:latest
     # Luôn khởi động lại container nếu container bị dừng
     restart: always

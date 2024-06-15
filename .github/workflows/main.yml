@@ -1,5 +1,4 @@
 # File của Github Actions
-
 name: CI/CD Pipeline
 
 # Chạy khi có sự kiện push hoặc pull request trên nhánh main hoặc CICD_Test
@@ -18,6 +17,7 @@ jobs:
     # Các services cần chạy cho job
     services:
       # build job sẽ chạy bản mới nhất của mysql từ Docker Hub
+      # Docker Hub mysql: https://hub.docker.com/_/mysql
       db:
         image: mysql:latest
         # Cấu hình biến môi trường (enviroment variable) cho mysql
@@ -31,16 +31,24 @@ jobs:
     # Xem thêm tại: https://github.com/actions/checkout
     - uses: actions/checkout@v4
 
+    # Composer cho phép cài đặt các dependencies của project trên Github Actions
     - name: Validate Composer files
       uses: docker://composer:1.9.0
       with:
         args: validate
 
+    # Cài đặt các dependencies của project
+    # Sử dụng Docker để chạy composer
     - name: Install Dependencies
       uses: docker://composer:1.9.0
       with:
         args: install
 
+    # Chạy các tests
     - name: Run Tests
+    # Trong quá trình khởi tạo website, ta có sử dụng lệnh "docker-compose up" trên Terminal
+    # Nên tương tự trên Github Actions, ta cũng cho chạy các lệnh đó trên Github Actions để kiểm tra
+    # docker-compose up -d để chạy các services trong docker-compose.yml
+    # -d để chạy ở chế độ daemon (background) tránh Github Actions chạy mãi không dừng
       run: |
         docker-compose up -d
