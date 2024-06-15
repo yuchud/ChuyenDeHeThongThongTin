@@ -26,9 +26,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        docker-compose up -d
-        docker-compose exec -T wordpress phpunit
-        docker-compose down
+        docker-compose
 
     - name: Build Docker Image
       run: docker build . -t my-wordpress
