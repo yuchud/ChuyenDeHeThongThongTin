@@ -3,11 +3,13 @@
     "description": "My project",
     "require": {
         "php": "^7.4",
+        "mysql": "^5.7",
         "ext-json": "*"
     },
     "config": {
         "platform": {
-            "php": "7.4"
+            "php": "7.4",
+            "mysql": "5.7"
         }
     },
     "extra": {
