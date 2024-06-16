@@ -28,7 +28,7 @@ services:
       WORDPRESS_DB_NAME: wordpress
     # Mount thư mục hiện tại vào thư mục /var/www/html của container
     volumes:
-      - ./wordpress:/var/www/html
+      - wordpress:/var/www/html
 
   # Service thứ hai (db)
   db:
@@ -45,7 +45,7 @@ services:
       MYSQL_ROOT_PASSWORD: root_password
     # Mount thư mục hiện tại vào thư mục /var/lib/mysql của container
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
 
   # Service thứ ba (nginx)
   nginx:
@@ -59,10 +59,10 @@ services:
       - 80:80
     # Mount thư mục hiện tại vào thư mục /etc/nginx/conf.d của container
     volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./wordpress:/var/www/html
+      - nginx:/etc/nginx/conf.d
+      - wordpress:/var/www/html
 
 volumes:
-  db_data: {}
+  mysql: {}
   wordpress: {}
   nginx: {}
