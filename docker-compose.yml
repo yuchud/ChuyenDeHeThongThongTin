@@ -61,3 +61,8 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./wordpress:/var/www/html
+
+volumes:
+  db_data: {}
+  wordpress: {}
+  nginx: {}
