@@ -15,16 +15,16 @@ jobs:
     # Được chạy trên phiên bản mới nhất của Ubuntu
     runs-on: ubuntu-latest
     # Các services cần chạy cho job
-    services:
-      # build job sẽ chạy bản mới nhất của mysql từ Docker Hub
-      # Docker Hub mysql: https://hub.docker.com/_/mysql
-      db:
-        image: mysql:latest
-        # Cấu hình biến môi trường (enviroment variable) cho mysql
-        env:
-          MYSQL_ROOT_PASSWORD: password
-        # Kiểm tra sức khỏe (health) của mysql
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    # services:
+    #   # build job sẽ chạy bản mới nhất của mysql từ Docker Hub
+    #   # Docker Hub mysql: https://hub.docker.com/_/mysql
+    #   db:
+    #     image: mysql:latest
+    #     # Cấu hình biến môi trường (enviroment variable) cho mysql
+    #     env:
+    #       MYSQL_ROOT_PASSWORD: password
+    #     # Kiểm tra sức khỏe (health) của mysql
+    #     options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     # Các tasks cần thực hiện trong job
     steps:
     # Checkout mã nguồn từ repository
