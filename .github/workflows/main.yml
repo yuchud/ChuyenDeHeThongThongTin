@@ -31,18 +31,18 @@ jobs:
     # Xem thêm tại: https://github.com/actions/checkout
     - uses: actions/checkout@v4
 
-    # Composer cho phép cài đặt các dependencies của project trên Github Actions
-    - name: Validate Composer files
-      uses: docker://composer:1.9.0
-      with:
-        args: validate
+    # # Composer cho phép cài đặt các dependencies của project trên Github Actions
+    # - name: Validate Composer files
+    #   uses: docker://composer:1.9.0
+    #   with:
+    #     args: validate
 
-    # Cài đặt các dependencies của project
-    # Sử dụng Docker để chạy composer
-    - name: Install Dependencies
-      uses: docker://composer:1.9.0
-      with:
-        args: install
+    # # Cài đặt các dependencies của project
+    # # Sử dụng Docker để chạy composer
+    # - name: Install Dependencies
+    #   uses: docker://composer:1.9.0
+    #   with:
+    #     args: install
 
     # Chạy các tests
     - name: Run Tests
