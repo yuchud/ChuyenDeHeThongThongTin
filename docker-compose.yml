@@ -19,7 +19,7 @@ services:
     restart: always
     # Mở cổng 8080 của máy host và map vào cổng 80 của container
     ports:
-      - 8080:80
+      - "8080:80"
     # Cấu hình biến môi trường cho wordpress
     environment:
       WORDPRESS_DB_HOST: db
@@ -28,6 +28,7 @@ services:
       WORDPRESS_DB_NAME: wordpress
     # Mount thư mục hiện tại vào thư mục /var/www/html của container
     volumes:
+    # - ./wordpress:/var/lib/mysql
       - wordpress:/var/www/html
 
   # Service thứ hai (db)
@@ -45,6 +46,7 @@ services:
       MYSQL_ROOT_PASSWORD: root_password
     # Mount thư mục hiện tại vào thư mục /var/lib/mysql của container
     volumes:
+    # - ./mysql:/var/lib/mysql
       - mysql:/var/lib/mysql
 
   # Service thứ ba (nginx)
@@ -56,13 +58,12 @@ services:
     restart: always
     # Mở cổng 80 của máy host và map vào cổng 80 của container
     ports:
-      - 80:80
+      - "80:80"
     # Mount thư mục hiện tại vào thư mục /etc/nginx/conf.d của container
     volumes:
-      - nginx:/etc/nginx/conf.d
+      - ./nginx:/etc/nginx/conf.d
       - wordpress:/var/www/html
 
 volumes:
-  mysql: {}
-  wordpress: {}
-  nginx: {}
+  mysql: 
+  wordpress:
